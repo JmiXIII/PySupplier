@@ -45,10 +45,13 @@ for supplier in suppliers_datas.RE_FOUR.dropna().unique():
     for i in range(len(rng)-1):
         sup = sup_datas[(sup_datas.LA_DECH < rng[i + 1]) &
                         (sup_datas.LA_DECH > rng[i])]
-        #wb.sheets.add(str(i+1))
-        wb.sheets(str(i+1)).range('A1').value = sup
-    wb.app.screen_updating = True
+        if wb.sheets(str(i+1)).range('B1').value == 'oui':
+            pass
+        else:
+            wb.sheets(str(i+1)).range('A1').value = sup
     wb.app.calculation = 'automatic'
-    wb.save(path + '/' + str(re_four)+' '+str(fourn) + '-H2075-02.xls')
+    wb.save(path + '/H2075-02 - ' + str(re_four)+' '+str(fourn) + '.xlsx')
+    wb.close()
+    wb.app.screen_updating = True
     wb.app.quit()
 print ('end')
